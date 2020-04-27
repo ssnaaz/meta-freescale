@@ -9,7 +9,7 @@ SRCREV = "013499c63d9eddd8c792bd8b136991caa3b8a100"
 
 S = "${WORKDIR}/git"
 
-inherit cmake lib_package pkgconfig perlnative pythonnative
+inherit cmake lib_package pkgconfig perlnative python3native
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG_append = \
