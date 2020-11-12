@@ -1,4 +1,4 @@
-PACKAGECONFIG_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2', \
-                                bb.utils.contains('DISTRO_FEATURES', 'x11 opengl',     'x11-gl x11-gles2', '', d), d)}"
-PACKAGECONFIG_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', '', \
-                                bb.utils.contains('DISTRO_FEATURES', 'x11 opengl',     'x11-gl', '', d), d)}"
+# Only _mx8 machine do provide virtual/libgbm required for any drm* flavour
+DRM-REMOVE_imxgpu = "drm-gl drm-gles2"
+DRM-REMOVE_imxgpu_mx8 = ""
+PACKAGECONFIG_remove = "${DRM-REMOVE}"

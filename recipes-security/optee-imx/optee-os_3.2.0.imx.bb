@@ -23,7 +23,7 @@ PLATFORM_FLAVOR_imx6qpdlsolox   = "mx6qsabresd"
 PLATFORM_FLAVOR_imx6ul7d        = "mx6ulevk"
 PLATFORM_FLAVOR_imx6ull14x14evk = "mx6ullevk"
 PLATFORM_FLAVOR_imx6ull9x9evk   = "mx6ullevk"
-PLATFORM_FLAVOR_imx6ulz14x14evk = "mx6ullevk"
+PLATFORM_FLAVOR_imx6ulz14x14evk = "mx6ulzevk"
 PLATFORM_FLAVOR_mx8mm   = "mx8mmevk"
 
 OPTEE_ARCH ?= "arm32"
@@ -71,8 +71,8 @@ do_deploy () {
 }
 
 do_install () {
-    install -d ${D}/lib/firmware/
-    install -m 644 ${B}/core/*.bin ${D}/lib/firmware/
+    install -d ${D}${nonarch_base_libdir}/firmware/
+    install -m 644 ${B}/core/*.bin ${D}${nonarch_base_libdir}/firmware/
 
     # Install the TA devkit
     install -d ${D}/usr/include/optee/export-user_ta_${OPTEE_ARCH}/

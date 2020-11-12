@@ -34,6 +34,8 @@ UBOOT_ENTRYPOINT_mx6ul  = "0x10008000"
 UBOOT_ENTRYPOINT_mx6ull  = "0x10008000"
 UBOOT_ENTRYPOINT_mx7 = "0x80008000"
 UBOOT_ENTRYPOINT_mx7ulp = "0x60008000"
+UBOOT_ENTRYPOINT_mx8mm  = "0x40480000"
+UBOOT_ENTRYPOINT_mx8mn  = "0x40480000"
 UBOOT_ENTRYPOINT_mx8mq  = "0x40480000"
 UBOOT_ENTRYPOINT_vf = "0x80008000"
 
@@ -57,12 +59,16 @@ MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
 # handled by software
 # DEFAULTTUNE_mx6 ?= "cortexa9t-neon"
 # handled by hardware
-DEFAULTTUNE_mx6 ?= "cortexa9thf-neon"
-DEFAULTTUNE_mx6ul ?= "cortexa7thf-neon"
+DEFAULTTUNE_mx6    ?= "cortexa9thf-neon"
+DEFAULTTUNE_mx6ul  ?= "cortexa7thf-neon"
 DEFAULTTUNE_mx6ull ?= "cortexa7thf-neon"
-DEFAULTTUNE_mx7 ?= "cortexa7thf-neon"
-DEFAULTTUNE_vf ?= "cortexa5thf-neon"
-DEFAULTTUNE_mx8mm ?= "cortexa53-crypto"
+DEFAULTTUNE_mx7    ?= "cortexa7thf-neon"
+DEFAULTTUNE_vf     ?= "cortexa5thf-neon"
+
+DEFAULTTUNE_mx8mm  ?= "cortexa53-crypto"
+DEFAULTTUNE_mx8mn  ?= "cortexa53-crypto"
+DEFAULTTUNE_mx8mq  ?= "cortexa53-crypto"
+DEFAULTTUNE_mx8qxp ?= "cortexa35-crypto"
 
 INHERIT += "machine-overrides-extender"
 
@@ -78,6 +84,7 @@ MACHINEOVERRIDES_EXTENDER_mx7d   = "imxfbdev:imxpxp:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx7ulp = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8qm  = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8mm  = "imxdrm:imxvpu:imxgpu:imxgpu2d:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx8mn  = "imxdrm:imxgpu:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8mq  = "imxdrm:imxvpu:imxgpu:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8qxp = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d"
 
@@ -98,6 +105,7 @@ MACHINEOVERRIDES_EXTENDER_FILTER_OUT_use-mainline-bsp = " \
     mx8 \
     mx8qm \
     mx8mm \
+    mx8mn \
     mx8mq \
     mx8qxp \
 "
@@ -121,6 +129,7 @@ MACHINE_SOCARCH_SUFFIX_mx6ul  = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx6ull = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8"
 MACHINE_SOCARCH_SUFFIX_mx8mm  = "-mx8mm"
+MACHINE_SOCARCH_SUFFIX_mx8mn  = "-mx8mn"
 MACHINE_SOCARCH_SUFFIX_mx8mq  = "-mx8m"
 MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8"
 MACHINE_SOCARCH_SUFFIX_use-mainline-bsp = "-imx"
@@ -315,7 +324,7 @@ WKS_FILE_DEPENDS ?= " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', '${OPTEE_WKS_FILE_DEPENDS}', '', d)} \
 "
 
-WKS_FILE_DEPENDS_mx8 += "imx-boot"
+WKS_FILE_DEPENDS_append_mx8 = " imx-boot "
 
 SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
 SOC_DEFAULT_WKS_FILE_mx8 ?= "imx-imx-boot-bootpart.wks.in"
